@@ -1,5 +1,5 @@
-class QuestionModel {
-  QuestionModel(this.question, this.options, this.correctAnswer);
+class ResultModel {
+  ResultModel(this.question, this.options, this.correctAnswer);
 
   final String question;
   final List<String> options;

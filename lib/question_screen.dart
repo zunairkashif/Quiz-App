@@ -1,7 +1,12 @@
 import "package:flutter/material.dart";
 import 'package:quizapp/utils/styled_text.dart';
-import "package:quizapp/utils/colors.dart";
 import 'package:quizapp/utils/button.dart';
+import 'package:quizapp/data/question_data.dart';
+
+var questionNumber = 0;
+const List<String> optionAlphas = ['A', 'B', 'C', 'D'];
+List<Widget> options = [];
+var currentSelectedOption = "";
 
 class Question extends StatefulWidget {
   const Question({super.key});
@@ -13,64 +18,45 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
+  void nextQuestion() {
+    setState(() {
+      questionNumber++;
+    });
+  }
+
+  void updateOptions() {
+    setState(() {});
+  }
+
   @override
   Widget build(context) {
+    int i = 0;
+    options.clear();
+    for (String option in trickyQuestions[questionNumber].options) {
+      options.add(
+        OptionButton(
+          optionAlphas[i],
+          option,
+          (currentSelectedOption == optionAlphas[i]),
+          updateOptions,
+        ),
+      );
+      i++;
+    }
+
     return Center(
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Heading(
-              "In a running race, if you pass the person in 2nd place, what position do you take?",
-              20,
-            ),
+            Heading(trickyQuestions[questionNumber].question, 20),
             SizedBox(height: 50),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 54,
-                  padding: EdgeInsets.symmetric(horizontal: 18),
-                  decoration: BoxDecoration(
-                    color: yellowOpacityColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        "A",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: blackColor,
-                        ),
-                      ),
-                      SizedBox(width: 18),
-                      Container(
-                        width: 2,
-                        height: 54,
-                        decoration: BoxDecoration(color: Colors.white),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "2nd place",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: blackColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            Column(mainAxisSize: MainAxisSize.min, children: options),
+            SizedBox(height: 50 - 16),
+            Button("Next", nextQuestion),
             SizedBox(height: 50),
-            Button("Next", () {}),
+            Heading("${questionNumber + 1}/${trickyQuestions.length}", 18),
           ],
         ),
       ),
