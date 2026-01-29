@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import "package:quizapp/utils/colors.dart";
-import "package:quizapp/utils/text_style.dart";
+import "package:quizapp/utils/styled_text.dart";
+import "package:quizapp/utils/button.dart";
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  const StartScreen(this.startQuiz, {super.key});
+
+  final void Function() startQuiz;
 
   @override
   Widget build(context) {
@@ -13,26 +15,10 @@ class StartScreen extends StatelessWidget {
         children: [
           Image(image: AssetImage("assets/images/quiz-logo.png"), width: 300),
           SizedBox(height: 30),
-          Heading("Quiz your brain."),
-          Heading("Level up your mind."),
+          Heading("Quiz your brain.", 24),
+          Heading("Level up your mind.", 24),
           SizedBox(height: 130),
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              side: BorderSide(
-                width: 6,
-                color: const Color.fromARGB(255, 214, 194, 106),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(14),
-              ),
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 38),
-              backgroundColor: button_color,
-              foregroundColor: black_color,
-              textStyle: TextStyle(fontSize: 20),
-            ),
-            child: Text("Start Quiz"),
-          ),
+          Button("Start Quiz", startQuiz),
         ],
       ),
     );
