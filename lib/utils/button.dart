@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:quizapp/utils/colors.dart";
 import 'package:quizapp/question_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   const Button(this.text, this.btnFunction, {super.key});
@@ -18,14 +19,14 @@ class Button extends StatelessWidget {
           color: const Color.fromARGB(255, 214, 194, 106),
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(10),
+          borderRadius: BorderRadiusGeometry.circular(14),
         ),
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 38),
         backgroundColor: yellowColor,
         foregroundColor: blackColor,
-        textStyle: TextStyle(fontSize: 20),
+        textStyle: TextStyle(fontSize: 18),
       ),
-      child: Text(text),
+      child: Text(text, style: GoogleFonts.poppins()),
     );
   }
 }
@@ -85,7 +86,7 @@ class _OptionButtonState extends State<OptionButton> {
               children: [
                 Text(
                   widget.optionAlpha,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: blackColor,

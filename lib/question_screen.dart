@@ -20,12 +20,19 @@ class _QuestionState extends State<Question> {
   var currentQuestionNumber = 0;
   List<Widget> currentOptions = [];
   CurrentSelectedOption currentSelectedOption = CurrentSelectedOption('');
+  bool selectedBeforeNext = false;
 
   void nextQuestion() {
-    setState(() {
-      currentSelectedOption.option = '';
-      currentQuestionNumber++;
-    });
+    if (currentSelectedOption.option == '') {
+      selectedBeforeNext = true;
+      setState(() {});
+    } else {
+      setState(() {
+        selectedBeforeNext = false;
+        currentSelectedOption.option = '';
+        currentQuestionNumber++;
+      });
+    }
   }
 
   void updateOptionsBackgroundColor() => setState(() {});
@@ -54,6 +61,8 @@ class _QuestionState extends State<Question> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Warning("Pick an option first!", 16, selectedBeforeNext),
+            SizedBox(height: 20),
             Heading(trickyQuestions[currentQuestionNumber].question, 20),
             SizedBox(height: 50),
             Column(mainAxisSize: MainAxisSize.min, children: currentOptions),

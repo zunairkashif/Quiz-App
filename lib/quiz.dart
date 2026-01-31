@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-// import "package:quizapp/start_screen.dart";
+import "package:quizapp/start_screen.dart";
 import "package:quizapp/question_screen.dart";
 import "package:quizapp/utils/colors.dart";
 
@@ -13,21 +13,21 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  // String screen = "start-screen";
+  String screen = "start-screen";
 
-  // void changeState() {
-  //   setState(() {
-  //     screen = 'question-screen';
-  //   });
-  // }
+  void changeState() {
+    setState(() {
+      screen = 'question-screen';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Widget currentState = StartScreen(changeState);
+    Widget currentState = StartScreen(changeState);
 
-    // if (screen == "question-screen") {
-    //   currentState = const Question();
-    // }
+    if (screen == "question-screen") {
+      currentState = const Question();
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -41,7 +41,7 @@ class _QuizState extends State<Quiz> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Question(),
+          child: currentState,
         ),
       ),
     );
