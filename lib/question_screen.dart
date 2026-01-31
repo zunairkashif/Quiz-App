@@ -58,7 +58,7 @@ class _QuestionState extends State<Question> {
             SizedBox(height: 50 - 16),
             Button("Next", nextQuestion),
             SizedBox(height: 50),
-            Heading("${questionNumber + 1}/${lengthOfQuestions}", 18),
+            Heading("${questionNumber + 1}/$lengthOfQuestions", 18),
           ],
         ),
       ),
