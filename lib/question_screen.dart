@@ -30,6 +30,7 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(context) {
+    int lengthOfQuestions = trickyQuestions.length;
     int j = 0;
     options.clear();
 
@@ -57,7 +58,7 @@ class _QuestionState extends State<Question> {
             SizedBox(height: 50 - 16),
             Button("Next", nextQuestion),
             SizedBox(height: 50),
-            Heading("${questionNumber + 1}/${trickyQuestions.length}", 18),
+            Heading("${questionNumber + 1}/${lengthOfQuestions}", 18),
           ],
         ),
       ),
