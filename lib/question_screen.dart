@@ -30,18 +30,19 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(context) {
-    int i = 0;
+    int j = 0;
     options.clear();
+
     for (String option in trickyQuestions[questionNumber].options) {
       options.add(
         OptionButton(
-          optionAlphas[i],
+          optionAlphas[j],
           option,
-          (currentSelectedOption == optionAlphas[i]),
+          (currentSelectedOption == optionAlphas[j]),
           updateOptions,
         ),
       );
-      i++;
+      j++;
     }
 
     return Center(
