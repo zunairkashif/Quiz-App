@@ -3,14 +3,13 @@ import 'package:quizapp/utils/styled_text.dart';
 import 'package:quizapp/utils/button.dart';
 import 'package:quizapp/data/question_data.dart';
 
-var questionNumber = 0;
-const List<String> optionAlphas = ['A', 'B', 'C', 'D'];
-List<Widget> options = [];
-var currentSelectedOption = "";
+class CurrentSelectedOption {
+  CurrentSelectedOption(this.option);
+  String option;
+}
 
 class Question extends StatefulWidget {
   const Question({super.key});
-
   @override
   State<Question> createState() {
     return _QuestionState();
@@ -18,32 +17,35 @@ class Question extends StatefulWidget {
 }
 
 class _QuestionState extends State<Question> {
+  var currentQuestionNumber = 0;
+  List<Widget> currentOptions = [];
+  CurrentSelectedOption currentSelectedOption = CurrentSelectedOption('');
+
   void nextQuestion() {
     setState(() {
-      questionNumber++;
+      currentSelectedOption.option = '';
+      currentQuestionNumber++;
     });
   }
 
-  void updateOptions() {
-    setState(() {});
-  }
+  void updateOptionsBackgroundColor() => setState(() {});
 
   @override
   Widget build(context) {
-    int lengthOfQuestions = trickyQuestions.length;
-    int j = 0;
-    options.clear();
+    currentOptions.clear();
+    int i = 0;
 
-    for (String option in trickyQuestions[questionNumber].options) {
-      options.add(
+    for (String option in trickyQuestions[currentQuestionNumber].options) {
+      currentOptions.add(
         OptionButton(
-          optionAlphas[j],
+          optionAlphas[i],
           option,
-          (currentSelectedOption == optionAlphas[j]),
-          updateOptions,
+          currentSelectedOption,
+          (currentSelectedOption.option == optionAlphas[i]),
+          updateOptionsBackgroundColor,
         ),
       );
-      j++;
+      i++;
     }
 
     return Center(
@@ -52,13 +54,16 @@ class _QuestionState extends State<Question> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Heading(trickyQuestions[questionNumber].question, 20),
+            Heading(trickyQuestions[currentQuestionNumber].question, 20),
             SizedBox(height: 50),
-            Column(mainAxisSize: MainAxisSize.min, children: options),
+            Column(mainAxisSize: MainAxisSize.min, children: currentOptions),
             SizedBox(height: 50 - 16),
             Button("Next", nextQuestion),
             SizedBox(height: 50),
-            Heading("${questionNumber + 1}/$lengthOfQuestions", 18),
+            Heading(
+              "${currentQuestionNumber + 1}/${trickyQuestions.length}",
+              18,
+            ),
           ],
         ),
       ),

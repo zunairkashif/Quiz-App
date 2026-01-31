@@ -91,3 +91,5 @@ final List<QuestionModel> trickyQuestions = [
     'A safe',
   ], 'A piano'),
 ];
+
+const optionAlphas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];

@@ -34,12 +34,14 @@ class Button extends StatelessWidget {
 class OptionButton extends StatefulWidget {
   final String optionAlpha;
   final String optionText;
+  final CurrentSelectedOption currentSelectedOption;
   final bool isSelected;
   final void Function() updateOptions;
 
   const OptionButton(
     this.optionAlpha,
     this.optionText,
+    this.currentSelectedOption,
     this.isSelected,
     this.updateOptions, {
     super.key,
@@ -53,7 +55,7 @@ class OptionButton extends StatefulWidget {
 
 class _OptionButtonState extends State<OptionButton> {
   void selectedOption() {
-    currentSelectedOption = widget.optionAlpha;
+    widget.currentSelectedOption.option = widget.optionAlpha;
     setState(() {
       widget.updateOptions();
     });
@@ -71,7 +73,7 @@ class _OptionButtonState extends State<OptionButton> {
               backgroundColor: widget.isSelected
                   ? yellowColor
                   : yellowOpacityColor,
-              shadowColor: Colors.transparent, // removes shadow
+              shadowColor: Colors.transparent,
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
